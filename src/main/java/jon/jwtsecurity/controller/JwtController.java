@@ -84,6 +84,19 @@ public class JwtController {
         response.addCookie(cookie);
     }
 
+    @PostMapping("/logout2")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        System.out.println("Logout successful...");
+        Cookie cookie = new Cookie("token", "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false); // true in production
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // This deletes the cookie
+        response.addCookie(cookie);
+        //return ResponseEntity.ok(Map.of("message", "Logged out"));
+        return ResponseEntity.ok("Logged out");
+    }
+
     @PostMapping("/getSecret")
     public ResponseEntity<Map> getSecret() {
         System.out.println("getSecret is called");
